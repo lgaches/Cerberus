@@ -75,13 +75,13 @@ extension VaultClient {
 /// Interface to Generic
 extension VaultClient {
 
-    public func store(_ secret: [String: String], atPath path: String) throws {
+    public func store(_ secret: [String: Any], atPath path: String) throws {
         try Secret.Generic.store(vaultAuthority: vaultAuthority, token: getToken(), secret: secret, path: path)
     }
 
-    public func secret(atPath path: String) throws -> [String: String] {
+    public func secret(atPath path: String) throws -> [String: Any] {
         let dict = try Secret.Generic.read(vaultAuthority: vaultAuthority, token: getToken(), path: path)
-        guard let data = dict["data"] as? [String: String] else {
+        guard let data = dict["data"] as? [String: Any] else {
             throw VaultCommunicationError.parseError
         }
         return data

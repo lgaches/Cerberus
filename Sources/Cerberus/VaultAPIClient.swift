@@ -82,7 +82,7 @@ struct Secret {
         }
     }
     struct Generic {
-        static func store(vaultAuthority: URL, token: String, secret: [String: String], path: String, backendMountPoint: String = "/secret") throws {
+        static func store(vaultAuthority: URL, token: String, secret: [String: Any], path: String, backendMountPoint: String = "/secret") throws {
             let store = vaultAuthority.appendingPathComponent("/v1").appendingPathComponent(backendMountPoint).appendingPathComponent(path)
             try postJSON(store, json: secret, token: token)
         }

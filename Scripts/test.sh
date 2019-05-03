@@ -2,7 +2,7 @@
 
 set -exo pipefail
 
-VAULT_NAME=$(docker run -d --rm vault:0.9.0)
+VAULT_NAME=$(docker run -d --rm vault:1.0.3)
 finish () {
   docker stop $VAULT_NAME
 }

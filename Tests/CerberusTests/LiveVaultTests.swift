@@ -55,11 +55,12 @@ class LiveVaultTests: XCTestCase {
         XCTAssertEqual(policies.first, "root")
 
         // can store and retrieve secrets
-        let secret = ["some_private_secret": UUID().uuidString]
-        XCTAssertNoThrow(try vaultClient.store(secret, atPath: "/foo/bar/cerberus/private"))
+        let secret: [String: Any] = ["some_private_secret": UUID().uuidString]
+        XCTAssertNoThrow(try vaultClient.store(secret, atPath: "/foo"))
 
-        let secretRead = try vaultClient.secret(atPath: "/foo/bar/cerberus/private")
-        XCTAssertEqual(secretRead, secret)
+        let secretRead = try vaultClient.secret(atPath: "/foo")
+        XCTAssertEqual(secretRead.first?.key, secret.first?.key)
+        XCTAssertEqual(secretRead.first?.value as? String, secret.first?.value as? String)
     }
 
     func testPeriodicToken() throws {
