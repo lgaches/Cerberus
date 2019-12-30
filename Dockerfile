@@ -1,4 +1,4 @@
-FROM swift:4
+FROM vapor/swift:5.1
 
 WORKDIR /code
 
